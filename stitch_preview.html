@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dark Concept - Mekan Tasarımı ve Dekorasyon</title>
+<meta name="description" content="Dark Concept - Elit mekan tasarımı, lüks dekorasyon ve dünya standartlarında fuar stand çözümleri.">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#2563EB",
+        "navy": "#0B1121",
+        "smoke": "#F8FAFC",
+        "gold": "#C5A059",
+      },
+      fontFamily: {
+        "display": ["Inter", "sans-serif"],
+        "serif": ["Playfair Display", "serif"]
+      },
+    },
+  },
+}
+</script>
+<style>
+html { scroll-behavior: smooth; }
+.hero-gradient {
+  background: linear-gradient(to right, rgba(11, 17, 33, 0.9) 0%, rgba(11, 17, 33, 0.4) 50%, rgba(11, 17, 33, 0) 100%);
+}
+.section-title { position: relative; padding-bottom: 25px; }
+.section-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 80px; height: 4px; background: #2563EB; }
+.section-title-center::after { left: 50%; transform: translateX(-50%); }
+
+/* Elit Font Weights */
+h1, h2, h3 { font-weight: 900 !important; }
+h4 { font-weight: 800 !important; }
+
+.masonry { column-count: 3; column-gap: 2rem; }
+.masonry-item { break-inside: avoid; margin-bottom: 2rem; position: relative; overflow: hidden; border-radius: 1.5rem; }
+@media (max-width: 1024px) { .masonry { column-count: 2; } }
+@media (max-width: 640px) { .masonry { column-count: 1; } }
+
+.img-zoom { transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+.masonry-item:hover .img-zoom { transform: scale(1.08); }
+.overlay { background: rgba(11, 17, 33, 0.8); opacity: 0; transition: opacity 0.4s; backdrop-blur: 4px; }
+.masonry-item:hover .overlay { opacity: 1; }
+
+.ref-card { filter: grayscale(0%); opacity: 1; transition: all 0.4s; }
+.ref-card:hover { filter: grayscale(0%); opacity: 1; transform: translateY(-8px) scale(1.05); }
+
+.elite-card { 
+  background: white; 
+  border: 1px solid #F1F5F9; 
+  transition: all 0.4s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+.elite-card:hover { 
+  border-color: #2563EB; 
+  box-shadow: 0 30px 40px -10px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px);
+}
+</style>
+</head>
+<body class="bg-white font-display text-navy antialiased">
+
+<!-- Navigation -->
+<header class="fixed top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-slate-100 px-6 md:px-20 py-4 flex items-center justify-between">
+  <div class="flex items-center gap-4">
+    <img src="images/logo.png" alt="Dark Concept" class="h-12 w-auto">
+  </div>
+  <nav class="hidden lg:flex items-center gap-10">
+    <a class="text-navy hover:text-primary text-sm font-extrabold transition-colors uppercase tracking-tight" href="#anasayfa">Anasayfa</a>
+    <a class="text-navy hover:text-primary text-sm font-extrabold transition-colors uppercase tracking-tight" href="#hakkimizda">Hakkımızda</a>
+    <a class="text-navy hover:text-primary text-sm font-extrabold transition-colors uppercase tracking-tight" href="#referanslar">Referanslar</a>
+    <a class="text-navy hover:text-primary text-sm font-extrabold transition-colors uppercase tracking-tight" href="#hizmetler">Hizmetler</a>
+    <a class="text-navy hover:text-primary text-sm font-extrabold transition-colors uppercase tracking-tight" href="#projeler">Projeler</a>
+    <a class="text-navy hover:text-primary text-sm font-extrabold transition-colors uppercase tracking-tight" href="#fuar">Fuar</a>
+    <a class="text-navy hover:text-primary text-sm font-extrabold transition-colors uppercase tracking-tight" href="#iletisim">İletişim</a>
+  </nav>
+  <div class="flex items-center gap-6">
+    <a href="tel:+905422816495" class="hidden sm:flex items-center gap-2 text-sm font-black text-navy hover:text-primary transition-colors">
+      <i class="fas fa-phone-alt"></i> 0542 281 64 95
+    </a>
+    <a href="#iletisim" class="bg-primary hover:bg-blue-700 text-white px-8 py-3 rounded-full text-sm font-black transition-all shadow-xl shadow-primary/30">Teklif Al</a>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section id="anasayfa" class="relative h-[95vh] flex items-center overflow-hidden pt-20">
+  <div class="absolute inset-0 z-10 hero-gradient"></div>
+  <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('images/hero_image.jpg');"></div>
+  <div class="relative z-20 max-w-7xl mx-auto px-6 md:px-20 w-full">
+    <div class="max-w-3xl">
+      <span class="inline-block px-5 py-2 rounded-full bg-white/10 backdrop-blur-md text-white border border-white/30 text-xs font-black tracking-[0.2em] uppercase mb-8">Premium Tasarım Stüdyosu</span>
+      <h1 class="text-white font-display font-black text-5xl md:text-7xl leading-tight mb-8 drop-shadow-2xl uppercase tracking-tighter">Mekana Değer Katan <br><span class="text-primary">Elit Tasarımlar</span></h1>
+      <p class="text-slate-200 text-xl md:text-2xl font-medium leading-relaxed mb-12 max-w-xl opacity-90">Dark Concept ile sınırları zorlayan iç mimari çözümler ve dünya standartlarında fuar standı projeleri.</p>
+      <div class="flex flex-wrap gap-5">
+        <a href="#projeler" class="bg-primary hover:bg-blue-700 text-white px-12 py-5 rounded-full text-lg font-black flex items-center gap-3 transition-all shadow-2xl shadow-primary/40">Portfolyoyu İncele <i class="fas fa-arrow-right"></i></a>
+        <a href="#iletisim" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 px-12 py-5 rounded-full text-lg font-black transition-all">Bize Ulaşın</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Hakkımızda -->
+<section id="hakkimizda" class="py-32 px-6 md:px-20 bg-white">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+    <div class="relative">
+      <div class="rounded-[2.5rem] overflow-hidden shadow-2xl scale-[1.02]">
+        <img src="images/dekorasyon/ozelprojedekor.png" alt="Tasarım" class="w-full h-auto">
+      </div>
+      <div class="absolute -bottom-12 -right-12 bg-white p-12 rounded-3xl shadow-[0_40px_80px_-15px_rgba(0,0,0,0.15)] hidden md:block border border-slate-50">
+        <div class="flex items-center gap-5 mb-5">
+          <div class="size-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary"><i class="fas fa-award text-3xl"></i></div>
+          <p class="font-black text-navy uppercase tracking-tighter text-2xl">Ödüllü <br>Tasarımlar</p>
+        </div>
+        <p class="text-slate-500 font-medium text-sm max-w-[220px]">Dünya çapında 75+ ülkede gerçekleştirdiğimiz projelerle fark yaratıyoruz.</p>
+      </div>
+    </div>
+    <div>
+      <h3 class="text-primary font-black text-sm tracking-[0.3em] uppercase mb-6">Vizyonumuz</h3>
+      <h2 class="text-5xl md:text-6xl font-serif section-title mb-10 leading-tight">Modern Çizgiler, <br><span class="text-primary">Eşsiz Dokunuşlar</span></h2>
+      <p class="text-slate-600 text-xl mb-12 leading-relaxed font-medium">Dark Concept, mekanların ruhunu anlayan ve onu en elit şekilde dışarı yansıtan bir tasarım ajansıdır. Her projede sadece bir tasarım değil, bir yaşam tarzı ve marka kimliği inşa ediyoruz.</p>
+      <div class="grid grid-cols-2 gap-12">
+        <div class="border-l-4 border-primary pl-8">
+          <p class="text-6xl font-black text-navy mb-3 tracking-tighter">1000+</p>
+          <p class="text-slate-500 font-extrabold uppercase tracking-[0.15em] text-xs">Tamamlanan Proje</p>
+        </div>
+        <div class="border-l-4 border-navy pl-8">
+          <p class="text-6xl font-black text-navy mb-3 tracking-tighter">15+</p>
+          <p class="text-slate-500 font-extrabold uppercase tracking-[0.15em] text-xs">Yıllık Deneyim</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Referanslar (PROMOTED TO TOP) -->
+<section id="referanslar" class="py-24 px-6 md:px-20 bg-smoke">
+  <div class="max-w-7xl mx-auto text-center mb-16">
+    <h3 class="text-primary font-black text-sm tracking-[0.3em] uppercase mb-4">Güven Odaklı</h3>
+    <h2 class="text-4xl md:text-5xl font-serif">Değerli Referanslarımız</h2>
+  </div>
+  <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-10 items-center">
+    <img src="images/logolar/Demiroren-1.jpg" class="h-10 mx-auto ref-card">
+    <img src="images/logolar/aksulogo_03_24.02.2015_d9f0e97_02.03.2018_0493cdc.png" class="h-10 mx-auto ref-card">
+    <img src="images/logolar/Basco.jpg" class="h-10 mx-auto ref-card">
+    <img src="images/logolar/Politeks.jpg" class="h-10 mx-auto ref-card">
+    <img src="images/logolar/Moonwell-1.jpg" class="h-10 mx-auto ref-card">
+    <img src="images/logolar/ataktasit.jpg" class="h-10 mx-auto ref-card">
+    <img src="images/logolar/balisi.jpg" class="h-10 mx-auto ref-card">
+    <img src="images/logolar/ugurlugenc.jpeg" class="h-10 mx-auto ref-card">
+  </div>
+</section>
+
+<!-- Hizmetler -->
+<section id="hizmetler" class="py-32 px-6 md:px-20 bg-white">
+  <div class="max-w-7xl mx-auto text-center mb-24">
+    <h3 class="text-primary font-black text-sm tracking-[0.3em] uppercase mb-4">Uzmanlığımız</h3>
+    <h2 class="text-5xl md:text-6xl font-serif section-title section-title-center">Seçkin Hizmet Grupları</h2>
+  </div>
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+    <div class="elite-card p-12 rounded-[2rem] group">
+      <div class="size-20 bg-navy text-white rounded-2xl flex items-center justify-center mb-10 group-hover:bg-primary transition-all duration-500 shadow-2xl shadow-navy/20 group-hover:-translate-y-2">
+        <i class="fas fa-couch text-3xl"></i>
+      </div>
+      <h4 class="text-2xl mb-6">İç Mekan Tasarımı</h4>
+      <p class="text-slate-500 text-base leading-relaxed mb-8 font-medium">Konut ve ofis alanlarınızı sanata dönüştüren profesyonel iç mimari çözümler.</p>
+      <a href="#iletisim" class="text-primary font-black text-sm uppercase tracking-widest flex items-center gap-3 group/link">Keşfet <i class="fas fa-arrow-right text-[12px] group-hover/link:translate-x-2 transition-transform"></i></a>
+    </div>
+    <div class="elite-card p-12 rounded-[2rem] group">
+      <div class="size-20 bg-navy text-white rounded-2xl flex items-center justify-center mb-10 group-hover:bg-primary transition-all duration-500 shadow-2xl shadow-navy/20 group-hover:-translate-y-2">
+        <i class="fas fa-building text-3xl"></i>
+      </div>
+      <h4 class="text-2xl mb-6">Fuar Stand Çözümleri</h4>
+      <p class="text-slate-500 text-base leading-relaxed mb-8 font-medium">Dünya çapında markanızı en iyi temsil edecek etkileyici stand tasarımları.</p>
+      <a href="#iletisim" class="text-primary font-black text-sm uppercase tracking-widest flex items-center gap-3 group/link">Keşfet <i class="fas fa-arrow-right text-[12px] group-hover/link:translate-x-2 transition-transform"></i></a>
+    </div>
+    <div class="elite-card p-12 rounded-[2rem] group">
+      <div class="size-20 bg-navy text-white rounded-2xl flex items-center justify-center mb-10 group-hover:bg-primary transition-all duration-500 shadow-2xl shadow-navy/20 group-hover:-translate-y-2">
+        <i class="fas fa-palette text-3xl"></i>
+      </div>
+      <h4 class="text-2xl mb-6">Özel Dekorasyon</h4>
+      <p class="text-slate-500 text-base leading-relaxed mb-8 font-medium">Mekana özgü mobilya ve aksesuar tasarımlarıyla kusursuz detaylar.</p>
+      <a href="#iletisim" class="text-primary font-black text-sm uppercase tracking-widest flex items-center gap-3 group/link">Keşfet <i class="fas fa-arrow-right text-[12px] group-hover/link:translate-x-2 transition-transform"></i></a>
+    </div>
+    <div class="elite-card p-12 rounded-[2rem] group">
+      <div class="size-20 bg-navy text-white rounded-2xl flex items-center justify-center mb-10 group-hover:bg-primary transition-all duration-500 shadow-2xl shadow-navy/20 group-hover:-translate-y-2">
+        <i class="fas fa-tasks text-3xl"></i>
+      </div>
+      <h4 class="text-2xl mb-6">Proje Yönetimi</h4>
+      <p class="text-slate-500 text-base leading-relaxed mb-8 font-medium">Tasarımın gerçeğe dönüşme sürecini sıfır hata ile yönetiyoruz.</p>
+      <a href="#iletisim" class="text-primary font-black text-sm uppercase tracking-widest flex items-center gap-3 group/link">Keşfet <i class="fas fa-arrow-right text-[12px] group-hover/link:translate-x-2 transition-transform"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- Portfolyo -->
+<section id="projeler" class="py-32 px-6 md:px-20 bg-smoke">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between mb-24 gap-12">
+    <div class="max-w-2xl">
+      <h3 class="text-primary font-black text-sm tracking-[0.3em] uppercase mb-6">Portfolyo</h3>
+      <h2 class="text-5xl md:text-6xl font-serif section-title leading-tight">İç Mekan & <br>Dekorasyon Galerisi</h2>
+    </div>
+    <div class="flex gap-4 p-2 bg-white rounded-full shadow-lg">
+      <button class="bg-navy text-white px-10 py-4 rounded-full text-sm font-black transition-all">Hepsi</button>
+      <button class="text-navy hover:bg-slate-50 px-10 py-4 rounded-full text-sm font-black transition-all">Dekorasyon</button>
+    </div>
+  </div>
+  
+  <div class="max-w-7xl mx-auto masonry">
+    <div class="masonry-item">
+      <img src="images/dekorasyon/magazadekor.png" alt="Project" class="w-full h-auto img-zoom">
+      <div class="overlay absolute inset-0 flex items-center justify-center p-10">
+        <div class="text-center text-white">
+          <h4 class="text-3xl font-serif mb-3 leading-tight">Modern Mağaza Tasarımı</h4>
+          <p class="text-base font-medium opacity-90 mb-8 uppercase tracking-widest">Başakşehir / İstanbul</p>
+          <button class="size-16 rounded-full border-2 border-white/40 flex items-center justify-center hover:bg-primary hover:border-primary transition-all transform hover:scale-110"><i class="fas fa-expand text-xl"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="masonry-item">
+      <img src="images/dekorasyon/ofisdekor.png" alt="Project" class="w-full h-auto img-zoom">
+    </div>
+    <div class="masonry-item">
+      <img src="images/dekorasyon/otelrestaurantdekor.png" alt="Project" class="w-full h-auto img-zoom">
+    </div>
+    <div class="masonry-item">
+      <img src="images/dekorasyon/ozelprojedekor.png" alt="Project" class="w-full h-auto img-zoom">
+    </div>
+    <div class="masonry-item">
+      <img src="images/foto_galeri/fuar.jpeg" alt="Project" class="w-full h-auto img-zoom">
+    </div>
+    <!-- SPLIT IMAGE REMOVED FROM GALLERY AS REQUESTED -->
+  </div>
+</section>
+
+<!-- Fuar Section (REVERTED TEXTS & MATCHED THEME) -->
+<section id="fuar" class="py-32 px-6 md:px-20 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-24">
+      <h3 class="text-primary font-black text-sm tracking-[0.3em] uppercase mb-4">Uzmanlık Alanımız</h3>
+      <h2 class="text-5xl md:text-6xl font-serif section-title section-title-center leading-tight">Fuar Stand & Dekorasyon</h2>
+      <p class="text-slate-500 text-xl font-medium mt-8 max-w-3xl mx-auto">Fuarlarda markanızı en iyi şekilde temsil eden profesyonel stand çözümleri</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+      <div class="order-2 lg:order-1">
+        <h3 class="text-4xl font-serif mb-10 leading-tight">Fuarlarda İz Bırakan Standlar</h3>
+        <p class="text-slate-600 text-lg mb-8 leading-relaxed font-medium">Dark Concept olarak, yılların dekorasyon ve tasarım deneyimini fuar stand tasarımına taşıyoruz. Yaratıcı konseptler, kaliteli malzemeler ve profesyonel montaj hizmetimizle markanızın fuarlarda öne çıkmasını sağlıyoruz.</p>
+        <p class="text-slate-600 text-lg mb-12 leading-relaxed font-medium">Yerli ve uluslararası fuarlarda birçok başarılı projeye imza attık. Her detayı sizin için düşünüyor, anahtar teslim çözümler sunuyoruz.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 bg-smoke p-10 rounded-3xl border border-slate-100">
+          <div class="text-center">
+            <p class="text-4xl font-black text-primary mb-2">1000+</p>
+            <p class="text-slate-500 font-extrabold uppercase tracking-tight text-[10px]">Fuar Projesi</p>
+          </div>
+          <div class="text-center px-4 border-x border-slate-200">
+            <p class="text-4xl font-black text-navy mb-2">250+</p>
+            <p class="text-slate-500 font-extrabold uppercase tracking-tight text-[10px]">Farklı Fuar Alanı</p>
+          </div>
+          <div class="text-center">
+            <p class="text-4xl font-black text-navy mb-2">75+</p>
+            <p class="text-slate-500 font-extrabold uppercase tracking-tight text-[10px]">Ülke Deneyimi</p>
+          </div>
+        </div>
+        
+        <a href="#iletisim" class="inline-flex items-center gap-6 group">
+          <span class="size-20 rounded-full bg-navy text-white flex items-center justify-center text-3xl group-hover:bg-primary group-hover:scale-110 transition-all shadow-xl shadow-navy/20"><i class="fas fa-arrow-right"></i></span>
+          <span class="text-2xl font-black border-b-4 border-primary pb-1 group-hover:text-primary transition-colors">Teklif Alın</span>
+        </a>
+      </div>
+      
+      <div class="grid grid-cols-2 gap-6 order-1 lg:order-2">
+        <div class="space-y-6">
+          <img src="images/foto_galeri/fuar1.jpeg" class="w-full h-72 object-cover rounded-[2rem] shadow-2xl">
+          <img src="images/foto_galeri/fuar10.jpeg" class="w-full h-56 object-cover rounded-[2rem] shadow-2xl">
+        </div>
+        <div class="space-y-6 pt-12">
+          <img src="images/foto_galeri/fuar13.jpeg" class="w-full h-56 object-cover rounded-[2rem] shadow-2xl">
+          <img src="images/foto_galeri/fuar15.jpeg" class="w-full h-72 object-cover rounded-[2rem] shadow-2xl">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- İletişim Formu -->
+<section id="iletisim" class="py-40 px-6 md:px-20 bg-smoke overflow-hidden">
+  <div class="max-w-7xl mx-auto relative">
+    <div class="absolute -top-60 -right-60 size-[500px] bg-primary/5 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-60 -left-60 size-[500px] bg-primary/5 rounded-full blur-3xl"></div>
+    
+    <div class="flex flex-col lg:flex-row gap-24 relative z-10">
+      <div class="lg:w-1/3">
+        <h3 class="text-primary font-black text-sm tracking-[0.3em] uppercase mb-6">İletişim</h3>
+        <h2 class="text-5xl md:text-6xl font-serif mb-12 leading-tight">Projenizi <br><span class="text-primary italic">Konuşalım</span></h2>
+        <p class="text-slate-500 text-lg mb-16 font-medium">Hayalinizdeki mekanı veya fuar standını profesyonel bir bakış açısıyla tasarlamak için form doldurun, hemen dönüş yapalım.</p>
+        
+        <div class="space-y-10">
+          <div class="flex items-center gap-8">
+            <div class="size-16 rounded-2xl bg-white shadow-xl flex items-center justify-center text-primary text-xl"><i class="fas fa-envelope"></i></div>
+            <a href="mailto:info@darkconcept.com.tr" class="text-xl font-black border-b-2 border-transparent hover:border-primary transition-all">info@darkconcept.com.tr</a>
+          </div>
+          <div class="flex items-center gap-8">
+            <div class="size-16 rounded-2xl bg-white shadow-xl flex items-center justify-center text-primary text-xl"><i class="fas fa-phone"></i></div>
+            <a href="tel:+905422816495" class="text-xl font-black border-b-2 border-transparent hover:border-primary transition-all">0542 281 64 95</a>
+          </div>
+          <div class="flex items-center gap-8">
+            <div class="size-16 rounded-2xl bg-white shadow-xl flex items-center justify-center text-primary text-xl"><i class="fas fa-map-marker-alt"></i></div>
+            <p class="text-base font-extrabold max-w-[240px] leading-snug">Başakşehir / İstanbul</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="lg:w-2/3">
+        <form class="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white p-16 rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.1)] border border-slate-50">
+          <div class="space-y-3">
+            <label class="text-xs font-black uppercase tracking-[0.2em] text-slate-400">Adınız Soyadınız</label>
+            <input type="text" placeholder="John Doe" class="w-full bg-slate-50 border-none rounded-2xl py-5 px-8 focus:ring-4 focus:ring-primary/10 transition-all font-bold">
+          </div>
+          <div class="space-y-3">
+            <label class="text-xs font-black uppercase tracking-[0.2em] text-slate-400">E-posta</label>
+            <input type="email" placeholder="john@example.com" class="w-full bg-slate-50 border-none rounded-2xl py-5 px-8 focus:ring-4 focus:ring-primary/10 transition-all font-bold">
+          </div>
+          <div class="space-y-3 md:col-span-2">
+            <label class="text-xs font-black uppercase tracking-[0.2em] text-slate-400">Mesajınız</label>
+            <textarea placeholder="Projenizden kısaca bahsedin..." rows="6" class="w-full bg-slate-50 border-none rounded-2xl py-5 px-8 focus:ring-4 focus:ring-primary/10 transition-all font-bold"></textarea>
+          </div>
+          <div class="md:col-span-2 pt-4">
+            <button class="w-full bg-navy hover:bg-primary text-white py-6 rounded-2xl font-black text-xl shadow-2xl shadow-navy/20 transition-all hover:-translate-y-1">Talebi Gönder</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-white py-24 px-6 md:px-20 border-t border-slate-100">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-16">
+    <img src="images/logo.png" class="h-14 opacity-90 transition-opacity hover:opacity-100">
+    <div class="flex gap-12">
+      <a href="https://www.instagram.com/darkconcept.tc" target="_blank" class="text-slate-400 hover:text-primary transition-all text-sm font-black uppercase tracking-[0.2em]">İnstagram</a>
+      <a href="https://www.linkedin.com/in/dark-concept-10b147288/" target="_blank" class="text-slate-400 hover:text-primary transition-all text-sm font-black uppercase tracking-[0.2em]">LİNKEDİN</a>
+      <a href="http://www.youtube.com/@Darkconcepttc" target="_blank" class="text-slate-400 hover:text-primary transition-all text-sm font-black uppercase tracking-[0.2em]">YOUTUBE</a>
+    </div>
+    <div class="text-center md:text-right">
+      <p class="text-navy text-xs font-black uppercase tracking-tight mb-2">&copy; 2024 Dark Concept. Tüm hakları saklıdır.</p>
+      <a href="https://www.linkedin.com/in/bayessoft/" target="_blank" class="text-slate-400 text-[10px] uppercase font-black tracking-widest hover:text-primary transition-colors">Designed by Bayessoft</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
