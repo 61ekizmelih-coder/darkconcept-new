@@ -381,7 +381,7 @@ h6 {
 }
 
 .divider {
-    width: 80px;
+    width: 150px;
     height: 4px;
     background: var(--accent-gradient);
     margin: 0 auto 24px;
