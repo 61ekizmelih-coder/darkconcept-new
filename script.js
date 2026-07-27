@@ -53,14 +53,21 @@ function updateActiveNav() {
         }
     });
 
-    navLinks.forEach(link => {
-        link.classList.remove('active');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function () {
 
-        if (link.getAttribute('href') === `#${currentSection}`) {
-            link.classList.add('active');
-        }
+        // Tıklanan menüyü aktif yap
+        navLinks.forEach(navLink => {
+            navLink.classList.remove('active');
+        });
+
+        this.classList.add('active');
+
+        // Mobil menüyü kapat
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
     });
-}
+});
 
 window.addEventListener('scroll', updateActiveNav);
 window.addEventListener('load', updateActiveNav);
