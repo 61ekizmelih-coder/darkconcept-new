@@ -33,30 +33,38 @@ navLinks.forEach(link => {
     });
 });
 
-// Active navigation link on scroll using IntersectionObserver for better performance
-const sections = document.querySelectorAll('section');
+// Active navigation link on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
 
-const sectionObserverOptions = {
-    threshold: 0.3
-};
+function updateActiveNav() {
+    const scrollPosition = window.scrollY + 150;
 
-const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const currentId = entry.target.getAttribute('id');
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentId}`) {
-                    link.classList.add('active');
-                }
-            });
+    let currentSection = '';
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+
+        if (
+            scrollPosition >= sectionTop &&
+            scrollPosition < sectionTop + sectionHeight
+        ) {
+            currentSection = section.getAttribute('id');
         }
     });
-}, sectionObserverOptions);
 
-sections.forEach(section => {
-    sectionObserver.observe(section);
-});
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+
+        if (link.getAttribute('href') === `#${currentSection}`) {
+            link.classList.add('active');
+        }
+    });
+}
+
+window.addEventListener('scroll', updateActiveNav);
+window.addEventListener('load', updateActiveNav);
 
 // Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
