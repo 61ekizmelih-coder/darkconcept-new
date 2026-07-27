@@ -35,7 +35,6 @@ navLinks.forEach(link => {
 
 // Active navigation link on scroll
 const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-link');
 
 function updateActiveNav() {
     const scrollPosition = window.scrollY + 150;
