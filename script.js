@@ -53,21 +53,10 @@ function updateActiveNav() {
         }
     });
 
-  navLinks.forEach(link => {
-    link.addEventListener('click', function () {
-
-        // Tıklanan menüyü aktif yap
-        navLinks.forEach(navLink => {
-            navLink.classList.remove('active');
-        });
-
-        this.classList.add('active');
-
-        // Mobil menüyü kapat
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+    navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + currentSection);
     });
-});
+}
 
 window.addEventListener('scroll', updateActiveNav);
 window.addEventListener('load', updateActiveNav);
@@ -303,3 +292,161 @@ document.getElementById("waPopup").style.display="none";
 
 
 document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll(".video-thumbnail video").forEach(v=>{v.muted=true;v.autoplay=true;v.loop=true;v.playsInline=true;const p=v.play();if(p){p.catch(()=>{});}});});
+
+// Logo altındaki banner. Süre index.html içindeki data-interval-seconds alanındadır.
+(function initHeroBanner() {
+    const banner = document.querySelector('.hero-banner');
+    if (!banner) return;
+
+    const track = banner.querySelector('.hero-banner-track');
+    const viewport = banner.querySelector('.hero-banner-viewport');
+    const previous = banner.querySelector('.hero-banner-prev');
+    const next = banner.querySelector('.hero-banner-next');
+    const toolbar = banner.querySelector('.hero-banner-toolbar');
+    const dots = banner.querySelector('.hero-banner-dots');
+    const counter = banner.querySelector('.hero-banner-count');
+    const countdown = banner.querySelector('.hero-banner-timer');
+    const toggle = banner.querySelector('.hero-banner-toggle');
+    const status = banner.querySelector('.hero-banner-status');
+    const configuredSeconds = Number(banner.dataset.intervalSeconds);
+    const seconds = Number.isFinite(configuredSeconds) && configuredSeconds >= 1
+        ? configuredSeconds : 5;
+    const duration = seconds * 1000;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let slides = Array.from(track.querySelectorAll('.hero-banner-slide'));
+    let current = 0;
+    let paused = reducedMotion.matches;
+    let keyboardFocus = false;
+    let pointerStart = null;
+    let clock = null;
+    let deadline = 0;
+
+    function stopClock() {
+        window.clearInterval(clock);
+        clock = null;
+    }
+
+    function startClock() {
+        stopClock();
+        toggle.textContent = paused ? 'Oynat' : 'Duraklat';
+        toggle.setAttribute('aria-label', paused ? 'Otomatik geçişi başlat' : 'Otomatik geçişi duraklat');
+        toggle.setAttribute('aria-pressed', String(paused));
+        if (slides.length < 2 || paused || keyboardFocus || document.hidden) {
+            countdown.textContent = '—';
+            return;
+        }
+        deadline = performance.now() + duration;
+        countdown.textContent = Math.ceil(seconds) + ' sn';
+        clock = window.setInterval(() => {
+            const remaining = deadline - performance.now();
+            if (remaining <= 0) {
+                showSlide(current + 1);
+            } else {
+                countdown.textContent = Math.ceil(remaining / 1000) + ' sn';
+            }
+        }, 100);
+    }
+
+    function showSlide(index, announce = false) {
+        if (!slides.length) return;
+        current = (index + slides.length) % slides.length;
+        track.style.transform = 'translateX(-' + current * 100 + '%)';
+        slides.forEach((slide, i) => {
+            slide.setAttribute('aria-hidden', String(i !== current));
+            slide.inert = i !== current;
+        });
+        Array.from(dots.children).forEach((dot, i) => {
+            dot.setAttribute('aria-current', String(i === current));
+        });
+        counter.textContent = (current + 1) + ' / ' + slides.length;
+        if (announce) status.textContent = (current + 1) + '. görsel / ' + slides.length;
+        startClock();
+    }
+
+    function refreshSlides() {
+        slides = Array.from(track.querySelectorAll('.hero-banner-slide'));
+        banner.hidden = slides.length === 0;
+        previous.hidden = next.hidden = toolbar.hidden = slides.length < 2;
+        dots.replaceChildren();
+        slides.forEach((slide, i) => {
+            slide.setAttribute('role', 'group');
+            slide.setAttribute('aria-roledescription', 'slayt');
+            slide.setAttribute('aria-label', (i + 1) + ' / ' + slides.length);
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = 'hero-banner-dot';
+            dot.setAttribute('aria-label', (i + 1) + '. görsele git');
+            dot.setAttribute('aria-controls', track.id);
+            dot.addEventListener('click', () => showSlide(i, true));
+            dots.appendChild(dot);
+        });
+        stopClock();
+        if (slides.length) showSlide(Math.min(current, slides.length - 1));
+    }
+
+    previous.addEventListener('click', () => showSlide(current - 1, true));
+    next.addEventListener('click', () => showSlide(current + 1, true));
+    toggle.addEventListener('click', () => {
+        paused = !paused;
+        startClock();
+    });
+    banner.addEventListener('keydown', event => {
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+            event.preventDefault();
+            showSlide(current + (event.key === 'ArrowRight' ? 1 : -1), true);
+        }
+    });
+    // Klavyeyle görsel seçerken otomatik geçiş bekler; fare tıklaması akışı durdurmaz.
+    banner.addEventListener('focusin', event => {
+        keyboardFocus = event.target !== toggle && event.target.matches(':focus-visible');
+        startClock();
+    });
+    banner.addEventListener('focusout', event => {
+        if (!banner.contains(event.relatedTarget)) {
+            keyboardFocus = false;
+            startClock();
+        }
+    });
+    viewport.addEventListener('pointerdown', event => {
+        if (event.pointerType !== 'touch' || !event.isPrimary || event.target.closest('button')) return;
+        pointerStart = { x: event.clientX, y: event.clientY };
+        viewport.setPointerCapture(event.pointerId);
+        stopClock();
+    });
+    viewport.addEventListener('pointerup', event => {
+        if (!pointerStart) return;
+        const dx = event.clientX - pointerStart.x;
+        const dy = event.clientY - pointerStart.y;
+        pointerStart = null;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+            showSlide(current + (dx < 0 ? 1 : -1), true);
+        } else {
+            startClock();
+        }
+    });
+    viewport.addEventListener('pointercancel', () => {
+        pointerStart = null;
+        startClock();
+    });
+    document.addEventListener('visibilitychange', startClock);
+    reducedMotion.addEventListener('change', event => {
+        paused = event.matches;
+        startClock();
+    });
+    // Yanlış dosya adı ya da silinmiş görsel, ziyaretçiye boş banner göstermez.
+    slides.forEach(slide => {
+        const img = slide.querySelector('img');
+        function skipMissingImage() {
+            slide.remove();
+            refreshSlides();
+        }
+        if (!img) {
+            skipMissingImage();
+            return;
+        }
+        img.draggable = false;
+        img.addEventListener('error', skipMissingImage, { once: true });
+        if (img.complete && img.naturalWidth === 0) skipMissingImage();
+    });
+    refreshSlides();
+})();
